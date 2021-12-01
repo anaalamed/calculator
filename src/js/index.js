@@ -1,4 +1,4 @@
-import './operators.js';
+import './others.js';
 
 const numBtns = document.querySelectorAll(".numBtn");
 const values = document.querySelector(".values");
@@ -6,19 +6,13 @@ const operators = document.querySelectorAll(".operatorBtn");
 const equalBtn = document.querySelector("#equal");
 
 
-const clearBtn = document.querySelector("#clear");
-
-console.log(numBtns);
-
-// AC button
-clearBtn.addEventListener("click", () => {
-    values.innerText = null;
-})
-
+let a = null;
+let b = null;
+let operator;
 
 // numbers butons 
 const onClickNum = (e) => {
-    if (a !== null) {
+    if (a !== null || values.innerText == 0) {
         values.innerText = null;
     }
 
@@ -32,24 +26,42 @@ for (let btn of numBtns ) {
 }
 
 
-
-// operators
-let a = null;
-let b = null;
-
-for (let operator of operators ) {
-    operator.addEventListener("click", () => {
+for (let op of operators ) {
+    op.addEventListener("click", (e) => {
         console.log("operator");
         a = values.innerText;
-        console.log(a);
+        operator = e.target.innerText;
+        
+        console.log('a', a);
+        console.log(operator);
         // values.innerText = null;
     });
 }
 
 equalBtn.addEventListener("click", () => {
     b = values.innerText;
-    console.log(b);
+    console.log("b", b);
 
-    values.innerText = Number(a)+ Number(b);
+    let res = null;
+    console.log(operator);
+
+    if (a && b) {
+        switch(operator) {
+            case "+": res = Number(a) + Number(b); break;
+            case "-": res = Number(a) - Number(b); break;
+            case "x": res = Number(a) * Number(b); break;
+            case "÷": res = Number(a) / Number(b); break;
+        }
+        console.log(res)
+        console.log(typeof(res))
+
+    
+        values.innerText = res;
+        a = res;
+    }
 })
+
+
+
+
 
