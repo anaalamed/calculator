@@ -10,13 +10,23 @@ let a = null;
 let b = null;
 let operator;
 
-// numbers butons 
+let reset;
+
+// click on numbers butons 
 const onClickNum = (e) => {
-    if (a !== null || values.innerText == 0) {
+    console.log("click on numbers butons ");
+    // reset values after A and creating B
+    console.log(reset)
+    if (a !== null && reset === true || values.innerText == 0) {
+        console.log('ipus');
         values.innerText = null;
+        reset = false;
     }
 
+    
     if (values.innerText.length <9) {
+        console.log('boom');
+        console.log(values.innerText)
         values.innerText += e.target.innerText;
     }
 }
@@ -25,7 +35,7 @@ for (let btn of numBtns ) {
     btn.addEventListener("click", onClickNum);
 }
 
-
+// click on operator - a, op
 for (let op of operators ) {
     op.addEventListener("click", (e) => {
         console.log("operator");
@@ -34,10 +44,12 @@ for (let op of operators ) {
         
         console.log('a', a);
         console.log(operator);
+        reset = true;
         // values.innerText = null;
     });
 }
 
+// click on =   -  b
 equalBtn.addEventListener("click", () => {
     b = values.innerText;
     console.log("b", b);
@@ -62,6 +74,18 @@ equalBtn.addEventListener("click", () => {
 })
 
 
+
+
+// ------------------------------------ OTHERS --------------------------
+
+// AC button
+const clearBtn = document.querySelector("#clear");
+
+clearBtn.addEventListener("click", () => {
+    values.innerText = 0;
+    a = null;
+    b = null;
+})
 
 
 

@@ -72,6 +72,17 @@
     justify-self: center;
   }
 
+  .btn:hover {
+    /* opacity: 0.5; */
+    transform: scale(1.1);
+    transition: 0.5s;
+  }
+
+  .btn:active {
+    opacity: 0.5;
+    transition: 0.5s;
+  }
+
   .topBtn {
     background-color: lightgray;
     color: black;
