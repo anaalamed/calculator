@@ -12,47 +12,42 @@ let sign = '+';
 let operator;
 let reset;
 
+
 // click on numbers butons 
-const onClickNum = (e) => {
-    console.log("click on numbers butons ");
-    console.log(reset)
-    console.log("sign:", sign)
-
-    // reset values after A and creating B
-    if (a !== null && reset === true || values.innerText == 0) {
-    // if (a !== null && reset === true ) {
-        // if(values.innerText != -0 ) {
-            console.log('ipus');
-            values.innerText = null;
-            reset = false;
-        // } 
-    }
-
-    if (values.innerText.length <9) {
-        console.log('boom');
-        values.innerText += e.target.innerText;
-        console.log(values.innerText);
-    }
-
-    if (sign === '-') {
-        // values.innerText = "-" + e.target.innerText;
-        values.innerText = "-" + values.innerText;
-        sign = "+";
-    }
-    // values.innerText = new Intl.NumberFormat().format((values.innerText))
-}
-
 for (let btn of numBtns ) {
-    btn.addEventListener("click", onClickNum);
+    btn.addEventListener("click", (e) => {
+    
+        // reset values after A and creating B
+        if (a !== null && reset === true || values.innerText == 0) {
+        // if (a !== null && reset === true ) {
+            // if(values.innerText != -0 ) {
+                console.log('ipus');
+                values.innerText = null;
+                reset = false;
+            // } 
+        }
+    
+        if (values.innerText.length <9) {
+            values.innerText += e.target.innerText;
+        }
+    
+        if (sign === '-') {
+            // values.innerText = "-" + e.target.innerText;
+            values.innerText = "-" + values.innerText;
+            sign = "+";
+        }
+        // values.innerText = new Intl.NumberFormat().format((values.innerText))
+
+    });
 }
 
-// click on operator - a, op
+// click on operator   (a, op)
 for (let op of operators ) {
     op.addEventListener("click", (e) => {
         a = values.innerText;
         operator = e.target.innerText;
         
-        console.log('a', a);
+        console.log('a =',a);
         console.log("operator", operator);
         reset = true;
         sign = "+";
@@ -60,10 +55,10 @@ for (let op of operators ) {
     });
 }
 
-// click on =   -  b
+// click on =     (b)
 equalBtn.addEventListener("click", () => {
     b = values.innerText;
-    console.log("b", b);
+    console.log("b =",b);
 
     let res = null;
     console.log(operator);
@@ -110,8 +105,6 @@ clearBtn.addEventListener("click", () => {
 // +/- button
 const signBtn = document.querySelector("#changeSign");
 signBtn.addEventListener("click", () => {
-    console.log("sign:", sign)
-
 
     if (values.innerText.toString().includes("-")) {
         sign = "-";
@@ -133,10 +126,21 @@ signBtn.addEventListener("click", () => {
         sign = "-";
         reset = false;
     }
-    console.log("sign:", sign)
 
     reset = false;
 })
 
+// % button
+const percentageBtn = document.querySelector("#percentage");
+percentageBtn.addEventListener("click", () => {
+    console.log('percentage');
+    let res = null;
 
-
+    if (!a)  res = values.innerText / 100;
+    else if (a) {
+        let perc = values.innerText;
+        console.log("perc = ", perc);
+        res = a / 100 * perc;        
+    }
+    values.innerText = res;
+})
